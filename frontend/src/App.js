@@ -8,7 +8,7 @@ const App = () => {
 
    const claimCoupon = async () => {
       try {
-         const res = await axios.post("https://round-robin-coupon-api.vercel.app/", {}, { withCredentials: true });
+         const res = await axios.post("https://round-robin-coupon-api.vercel.app", {}, { withCredentials: true });
          setCoupon(res.data.code);
          toast.success("Coupon claimed successfully!");
       } catch (err) {
