@@ -28,8 +28,8 @@ router.post("/claim", checkAbuse, async (req, res) => {
 
       res.cookie("session", sessionId, {
          httpOnly: true,
-         secure: true, 
-         sameSite: "None", 
+         secure: process.env.NODE_ENV === "production",
+         sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
          maxAge: 3600000
       });
 
