@@ -7,12 +7,18 @@ const rateLimit = require("express-rate-limit");
 const couponRoutes = require("./routes/coupons");
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors(
+    { 
+    origin: ["https://round-robin-coupon-rho.vercel.app/"],
+    methods: ["POST, GET"],
+    credentials: true 
+    }
+));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/coupons", couponRoutes);
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://aineshsridhar:0ezLfNuZYnSUMyWa@cluster0.qpx9z.mongodb.net/roundrobin?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
    .then(() => console.log("MongoDB Connected"))
    .catch(err => console.error(err));
 
