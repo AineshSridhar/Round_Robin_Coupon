@@ -7,21 +7,11 @@ const rateLimit = require("express-rate-limit");
 const couponRoutes = require("./routes/coupons");
 
 const app = express();
-app.use(cors(
-    { 
-    origin: ["https://round-robin-coupon-rho.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true 
-    }
-));
-
-app.options("*", cors({
-    origin: ["http://localhost:3000", "https://round-robin-coupon-rho.vercel.app"],
+app.use(cors({
+    origin: "https://round-robin-coupon-rho.vercel.app",
     methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
+    credentials: true 
 }));
-
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/coupons", couponRoutes);
