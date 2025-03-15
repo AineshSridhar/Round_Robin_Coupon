@@ -13,12 +13,8 @@ router.post("/claim", checkAbuse, async (req, res) => {
       const coupon = await Promise.race([
          Coupon.findOneAndUpdate({ assigned: false }, { assigned: true }, { new: true }),
          new Promise((_, reject) => setTimeout(() => reject(new Error("Database timeout")), 3000)) // 3s timeout
-     ]);
+      ]);
      
-     if (!coupon) {
-         return res.status(404).json({ message: "No coupons available." });
-     }
-
       if (!coupon) {
          return res.status(404).json({ message: "No coupons available." });
       }
